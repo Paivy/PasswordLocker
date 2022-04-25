@@ -33,18 +33,21 @@ class Credentials:
         return cls.accounts
 
     @classmethod
-    def find_credentials(cls, account):
+    def find_credentials(cls, accountname):
         """
          function to find credentials
         """
         
         for credentials in cls.accounts:
-            if credentials.accounts == account:
+            if credentials.accountname == accountname:
                 return credentials
 
     @classmethod
-    def credentials_exist(cls, account):
-        for credentials in cls.accounts:
-            if credentials.account == account:
+    def cred_exist(cls, accountname):
+        """
+        function to check wether credentials exist
+        """
+        for cred in cls.accounts:
+            if cred.accountname == accountname:
                 return True
         return False

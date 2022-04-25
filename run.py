@@ -1,7 +1,7 @@
-#!/usr/bin/env python3.8
 
 import string
 from random import * 
+
 from user import User
 from credentials import Credentials
 
@@ -32,11 +32,15 @@ def delete_account(account):
 def display_accounts():
     return Credentials.display_account()
 
-def find_credentials(account):
-    return Credentials.find_credentials(account)
+def find_credentials(accountname):
+    return Credentials.find_credentials(accountname)
 
-def cred_exist(account):
-    return Credentials.credentials_exist(account)
+def check_existing_cred(accountname):
+    """
+    function to check for existing credentials
+    """
+    return Credentials.cred_exist(accountname)
+chars = 'abcdefghijklmnoprstuvwyzABCDEFGHIKLMNOPRSTUVWYZ1234567890~`!@#$%^&*()?/[]'
 def main():
     while True:
         print("Welcome to Password Locker write SU TO Signup or LG  to Loginto start")
@@ -71,8 +75,25 @@ def main():
             print('Account Name...')
             accountname = input()
 
-            print('Account Password...')
-            accountpassword = input()
+            while True:
+                print('use short code: \n own - enter your own password, gen - generate a password')
+                short_code = input().lower()
+                if short_code == 'own':
+                    print('Password:')
+                    accountpassword = input()
+                elif short_code == 'gen':
+                    while True:
+                        password_len = int(
+                        input('password length:'))
+                        password = ''
+                        for x in range(0, password_len):
+                            password_char = random.choice(chars)
+                            password = password + password_char
+                            print('Hello here is your password:',accountpassword)
+                        break
+                    print('Password:')
+                    accountpassword = input()
+                break
 
             save_account(create_account(accountusername,accountname,accountpassword))
 
@@ -93,11 +114,29 @@ def main():
 
 
         elif short_code == 'fc':
-            # print()
+            print('Please Enter Account to Search:')
             search_account = input()
-            if cred_exist(search_account):
-                search_acc = find_credentials(search_account)
-                print(f'You have a {search_acc.account} account.')
+            if check_existing_cred(search_account):
+                search_cred = find_credentials(search_account)
+                print('\n')
+                print(
+                f'Yes you have {search_cred.accountname} in your storage.')
+            else:
+                print('Ooops!! That account does not exist!!')
+
+        elif short_code == 'd':
+            print('Please Enter Account to Delete:')
+            search_account = input()
+            if find_credentials(search_account):
+                search_cred = find_credentials(search_account)
+                search_cred.delete_account()        
+                print('\n')
+                print(
+                    f'Your {search_cred.accountname} credentials were deleted successfully! ')
+            else:
+                print('Ooops!! That account does not exist!!')
+
+    
 
 
 if __name__ == '__main__':
