@@ -12,6 +12,7 @@ class TestCredentials(unittest.TestCase):
         self.assertEqual(self.new_account.accountusername,"Paivy")
         self.assertEqual(self.new_account.accountname,"paivy123")
         self.assertEqual(self.new_account.accountpassword,"paivy123")
+
     def test_save_user(self):
         self.new_account.save_account()
         self.assertEqual(len (Credentials.accounts),1)
