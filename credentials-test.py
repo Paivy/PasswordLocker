@@ -12,4 +12,11 @@ class TestCredentials(unittest.TestCase):
         self.assertEqual(self.new_account.accountusername,"Paivy")
         self.assertEqual(self.new_account.accountname,"paivy123")
         self.assertEqual(self.new_account.accountpassword,"paivy123")
-        
+    def test_save_user(self):
+        self.new_account.save_account()
+        self.assertEqual(len (Credentials.accounts),1)
+
+    def test_delete_user(self):
+        """
+        test_delete_contact to test if we can remove an account from our accounts list
+        """
