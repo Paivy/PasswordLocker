@@ -12,3 +12,22 @@ class Credentials:
         self.accountusername   =accountusername
         self.accountname =accountname
         self.accountpassword = accountpassword
+
+    def save_account(self):
+        """
+        save_account method saves user information in accounts
+        """
+        Credentials.accounts.append(self)
+    def delete_account(self):
+        """
+        delete_account method deletes user information in accounts
+        """
+        Credentials.accounts.remove(self)
+    @classmethod
+    def display_account(cls):
+        """
+        method that returns information from the accounts
+        """
+        # for account in cls.accounts:
+
+        return cls.accounts
