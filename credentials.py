@@ -31,3 +31,13 @@ class Credentials:
         # for account in cls.accounts:
 
         return cls.accounts
+
+    @classmethod
+    def find_credentials(cls, accounts):
+        """
+         function to find credentials
+        """
+        
+        for credentials in cls.accounts:
+            if credentials.accounts == accounts:
+                return credentials
